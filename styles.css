@@ -1,0 +1,625 @@
+:root {
+    --bg-color: #0d0d0d;
+    /* Deeper black */
+    --card-color: #1a1a1a;
+    --primary-color: #FFFFFF;
+    --secondary-color: #E0E0E0;
+    --accent-color: #0A97B0;
+    /* Cyan - Darker */
+    --accent-glow: rgba(10, 151, 176, 0.4);
+    --font-main: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    background: radial-gradient(circle at 50% 0%, #1a2a3a 0%, #0d0d0d 75%);
+    /* Deeper, more centered spotlight */
+    background-attachment: fixed;
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+    /* Increased for readability */
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00B8D4;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+::selection {
+    background: var(--accent-color);
+    color: #000;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--primary-color);
+    margin-bottom: 0.5em;
+}
+
+p {
+    color: var(--secondary-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: var(--accent-color);
+    }
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 5px var(--accent-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    100% {
+        box-shadow: 0 0 5px var(--accent-glow);
+    }
+}
+
+/* Navbar */
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
+    padding: 2rem 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ffffff, var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+/* Navbar Links */
+.nav-links {
+    display: flex;
+    gap: 50px;
+    /* Further increased spacing */
+    align-items: center;
+}
+
+.nav-links a {
+    color: #e0e0e0;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s, transform 0.2s;
+    position: relative;
+}
+
+/* Replacing previous accents with Cyan */
+.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a.active {
+    color: var(--accent-color);
+}
+
+/* Social Links in Navbar */
+.social-links {
+    display: flex;
+    gap: 30px;
+    /* Increased from 15px */
+    align-items: center;
+}
+
+.social-links a {
+    color: #e0e0e0;
+    font-size: 1.8rem;
+    /* Bigger icons */
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+    /* Slight zoom on hover */
+}
+
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 80px;
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    opacity: 0;
+    /* Start hidden for staggered animation */
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 1.5rem auto;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+.highlight {
+    color: var(--accent-color);
+    position: relative;
+    display: inline-block;
+}
+
+.hero-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+}
+
+.btn {
+    padding: 0.9rem 2.5rem;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(187, 134, 252, 0.3);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: #000;
+    border: 2px solid var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.btn-secondary {
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    background-color: transparent;
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-color);
+    color: #000;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Sections */
+.section {
+    padding: 6rem 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    position: relative;
+    display: block;
+    width: 100%;
+    /* Force full width to ensure text-align centers content */
+    margin: 0 0 4rem;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    margin: 10px auto 0;
+}
+
+/* Typography refinements */
+h1,
+h2,
+h3 {
+    letter-spacing: -0.02em;
+    /* Modern tight spacing */
+}
+
+p {
+    font-weight: 300;
+    color: #cccccc;
+}
+
+/* About Section */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.5s forwards;
+    /* Simulating appear on load for now, intersection observer would be better */
+}
+
+.about-card {
+    background: rgba(255, 255, 255, 0.03);
+    /* Lighter, cleaner glass */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 3rem;
+    /* More padding */
+    border-radius: 24px;
+    /* Softer corners */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0, 229, 255, 0.15);
+}
+
+.about-card h3 {
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Skills Section */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.skill-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent-color);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom;
+}
+
+.skill-card:hover::before {
+    transform: scaleY(1);
+}
+
+.skill-card:hover {
+    transform: translateY(-8px);
+    background-color: rgba(45, 45, 45, 0.8);
+    box-shadow: 0 10px 20px rgba(0, 229, 255, 0.1);
+    border-color: var(--accent-color);
+}
+
+.skill-card h4 {
+    color: var(--primary-color);
+    margin: 1rem 0 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.skill-card i {
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.skill-card.wide {
+    grid-column: span 2;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .skill-card.wide {
+        grid-column: span 1;
+    }
+}
+
+/* Projects Section */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: var(--accent-color);
+}
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), #00B8D4);
+}
+
+.project-title {
+    margin-top: 0.5rem;
+    margin-bottom: 0.8rem;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.project-tech {
+    display: inline-block;
+    background-color: rgba(0, 229, 255, 0.1);
+    color: var(--accent-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+}
+
+.project-desc p {
+    font-size: 0.95rem;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+}
+
+/* Contact Section */
+.contact-section {
+    margin-bottom: 0;
+    padding-bottom: 2rem;
+}
+
+.contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.contact-item {
+    background-color: rgba(30, 30, 30, 0.5);
+    padding: 2.5rem;
+    border-radius: 16px;
+    width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    background-color: rgba(30, 30, 30, 0.8);
+}
+
+.contact-item i {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1.2rem;
+}
+
+.main-footer {
+    text-align: center;
+    margin-top: 4rem;
+    border-top: 1px solid #333;
+    padding-top: 2rem;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* App Main */
+.main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Typing Effect Class */
+.typing-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.prefix-text {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--primary-color);
+}
+
+.typing-text {
+    border-right: 3px solid var(--accent-color);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: blink 0.75s step-end infinite;
+    display: inline-block;
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 2.2rem;
+    text-shadow: 0 0 10px rgba(10, 151, 176, 0.7);
+}
+
+/* Scroll Animations */
+.hidden-element {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.show-element {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Scroll Animations */
+.hidden-element {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.show-element {
+    opacity: 1;
+    transform: translateY(0);
+}
