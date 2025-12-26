@@ -950,3 +950,109 @@ p {
         font-size: 2rem;
     }
 }
+
+/* 3D Flip Card Styles */
+.skill-card {
+    background-color: transparent;
+    perspective: 1000px;
+    /* Remove opacity/backdrop from container, moving to faces */
+    padding: 0;
+    /* Remove padding from container */
+    border: none;
+    box-shadow: none;
+}
+
+.skill-card-inner {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    /* Fixed height for flip consistency */
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.skill-card.flipped .skill-card-inner {
+    transform: rotateY(180deg);
+}
+
+.skill-card-front,
+.skill-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.skill-card-front {
+    background: rgba(23, 23, 23, 0.6);
+    backdrop-filter: blur(20px);
+}
+
+.skill-card-back {
+    background: rgba(23, 23, 23, 0.95);
+    /* Slightly clearer background for text readability */
+    color: white;
+    transform: rotateY(180deg);
+    overflow-y: auto;
+    /* Allow scrolling if content is too long */
+}
+
+/* Back Content Styling */
+.skill-card-back h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.skill-card-back ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.skill-card-back li {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    color: #ccc;
+    line-height: 1.4;
+    padding-left: 15px;
+    position: relative;
+}
+
+.skill-card-back li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.skill-card-back p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+    color: #aeaeae;
+}
+
+/* Enhanced Project Card Hover */
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+}
+
+.project-card:hover .project-title {
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
