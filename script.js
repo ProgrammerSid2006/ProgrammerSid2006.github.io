@@ -128,4 +128,38 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
         });
     });
+    // Mobile Navigation Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinksContainer = document.querySelector('.nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            // Toggle Nav
+            navLinksContainer.classList.toggle('nav-active');
+            hamburger.classList.toggle('active');
+
+            // Animate Links
+            navLinksItems.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `fadeInRight 0.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+        });
+    }
+
+    // Close menu when a link is clicked
+    navLinksItems.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinksContainer.classList.remove('nav-active');
+            hamburger.classList.remove('active');
+
+            navLinksItems.forEach(link => {
+                link.style.animation = '';
+            });
+        });
+    });
+
 });
