@@ -14,10 +14,17 @@
 
 <body>
 
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container navbar-content">
-            <div class="logo">SIDDHARTH</div>
+            <div class="logo cosmic-logo">SIDDHARTH</div>
             <div class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
@@ -61,16 +68,16 @@
         <!-- About Section -->
         <section id="about" class="section">
             <div class="container">
-                <h2 class="section-title hidden-element">About Me</h2>
+                <h2 class="section-title reveal reveal-up">About Me</h2>
                 <div class="about-content">
-                    <div class="about-card hidden-element">
+                    <div class="about-card reveal reveal-left">
                         <h3><i class="fa-solid fa-graduation-cap"></i> Education</h3>
                         <p><strong>Bachelor of Technology (B.Tech) – Computer Science Engineering</strong></p>
                         <p>SRM Institute of Science and Technology, Trichy</p>
                         <p>CGPA: 8.30 / 10</p>
                         <p>Graduation Year : 2028</p>
                     </div>
-                    <div class="about-card">
+                    <div class="about-card reveal reveal-right">
                         <h3><i class="fa-solid fa-certificate"></i> Certifications</h3>
                         <ul>
                             <li>Complete C & C++ Programming Course – Mastering C & C++ (Udemy)</li>
@@ -84,10 +91,10 @@
         <!-- Skills Section -->
         <section id="skills" class="section">
             <div class="container">
-                <h2 class="section-title hidden-element">SKILLS</h2>
+                <h2 class="section-title reveal reveal-up">SKILLS</h2>
                 <div class="skills-grid">
                     <!-- Languages -->
-                    <div class="skill-card hidden-element">
+                    <div class="skill-card reveal reveal-zoom delay-100">
                         <i class="fa-brands fa-python fa-3x"></i>
                         <h4>Languages</h4>
                         <p class="skill-list">Python (Proficient), C</p>
@@ -123,11 +130,11 @@
         <!-- Projects Section -->
         <section id="projects" class="section">
             <div class="container">
-                <h2 class="section-title hidden-element">Projects</h2>
+                <h2 class="section-title reveal reveal-up">Projects</h2>
                 <div class="projects-grid">
 
                     <a href="https://github.com/ProgrammerSid2006/Password-manager" target="_blank"
-                        class="project-card hidden-element">
+                        class="project-card reveal reveal-up delay-100">
                         <h3 class="project-title">Password Manager (CLI-based)</h3>
                         <span class="project-tech">Python, MongoDB</span>
                         <div class="project-desc">
@@ -140,7 +147,7 @@
                     </a>
 
                     <a href="https://github.com/ProgrammerSid2006/Expense-Tracker-in-Python" target="_blank"
-                        class="project-card">
+                        class="project-card reveal reveal-up delay-200">
                         <h3 class="project-title">Expense Tracker Application</h3>
                         <span class="project-tech">Python, Flet, MySQL</span>
                         <div class="project-desc">
@@ -152,7 +159,7 @@
                     </a>
 
                     <a href="https://github.com/ProgrammerSid2006/Cloud-Sync-Task-API" target="_blank"
-                        class="project-card">
+                        class="project-card reveal reveal-up delay-300">
                         <h3 class="project-title">Cloud-Based Task Management API</h3>
                         <span class="project-tech">Python, FastAPI, Firebase</span>
                         <div class="project-desc">
@@ -174,19 +181,19 @@
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="container">
-                <h2 class="section-title hidden-element">Get In Touch</h2>
+                <h2 class="section-title reveal reveal-up">Get In Touch</h2>
                 <div class="contact-grid">
-                    <div class="contact-item hidden-element">
+                    <div class="contact-item reveal reveal-left delay-100">
                         <i class="fa-solid fa-envelope"></i>
                         <h3>Email</h3>
                         <p><a href="mailto:c.siddharth06092006@gmail.com">c.siddharth06092006@gmail.com</a></p>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item reveal reveal-up delay-200">
                         <i class="fa-solid fa-phone"></i>
                         <h3>Phone</h3>
                         <p><a href="tel:+919360987769">+91 9360987769</a></p>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item reveal reveal-right delay-300">
                         <i class="fa-solid fa-location-dot"></i>
                         <h3>Location</h3>
                         <p>Tamil Nadu, India</p>

@@ -41,25 +41,40 @@ document.addEventListener('DOMContentLoaded', () => {
         type();
     }
 
-    // Scroll Animations
-    const observer = new IntersectionObserver((entries) => {
+    // Advanced Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('show-element');
+                entry.target.classList.add('active');
+                // Optional: Stop observing once revealed if you want it to trigger only once
+                // observer.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.1
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
     });
 
-    const hiddenElements = document.querySelectorAll('.hidden-element');
-    hiddenElements.forEach((el) => observer.observe(el));
+    revealElements.forEach((el) => revealObserver.observe(el));
 
-    // Active Link Highlighting (Scroll Spy)
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    // Parallax Effect for Hero Section
+    const heroContent = document.querySelector('.hero-content');
 
     window.addEventListener('scroll', () => {
+        const scrollValue = window.scrollY;
+
+        // Move hero content slightly slower than scroll (Parallax)
+        if (heroContent) {
+            heroContent.style.transform = `translateY(${scrollValue * 0.4}px)`;
+            heroContent.style.opacity = 1 - (scrollValue / 700);
+        }
+
+        // Active Link Highlighting (Scroll Spy)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
         let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
@@ -110,6 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.about-card, .skill-card, .project-card');
 
     cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            // Remove transition during hover to make the JS update instant/smooth
+            card.style.transition = 'none';
+        });
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -125,6 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         card.addEventListener('mouseleave', () => {
+            // Restore transition for smooth reset
+            card.style.transition = 'all 0.5s ease';
             card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
         });
     });
@@ -161,5 +183,112 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // --- Advanced Visual Effects ---
+
+    // 1. Scroll Progress Bar
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        if (progressBar) {
+            progressBar.style.width = `${scrollPercent}%`;
+        }
+    });
+
+    // 2. Particle Background System
+    const canvas = document.getElementById('particles-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray;
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        // Mouse Interactivity
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 150
+        }
+
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        // Particle Class
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                // Size: Smaller stars for distance effect (0.5 to 2px)
+                this.size = Math.random() * 1.5 + 0.5;
+
+                // Opacity: Random opacity for depth (fainter = further)
+                this.opacity = Math.random() * 0.5 + 0.3; // 0.3 to 0.8
+
+                // Speed: Very slow drift, linked to size for parallax (larger/closer moves slightly faster)
+                const speedFactor = this.size * 0.05;
+                this.speedX = (Math.random() * 2 - 1) * speedFactor;
+                this.speedY = (Math.random() * 2 - 1) * speedFactor;
+
+                this.color = `rgba(255, 255, 255, ${this.opacity})`;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Wrap around edges for infinite space feel (instead of bounce)
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+
+                // Subtle mouse parallax (optional - moves stars slightly away/towards mouse)
+                // keeping it simple static drift for now as requested "realistic space" often implies vastness
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            // Much higher density for "star field" look
+            let numberOfParticles = (canvas.height * canvas.width) / 4000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+        }
+
+        initParticles();
+        animateParticles();
+    }
+
 
 });
