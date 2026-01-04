@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         card.addEventListener('mousemove', (e) => {
+            if (card.classList.contains('flipped')) return; // Disable tilt when flipped
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -485,6 +486,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Click to Flip
         card.addEventListener('click', () => {
             card.classList.toggle('flipped');
+            if (card.classList.contains('flipped')) {
+                // Determine if we should reset transform or keep it? 
+                // Resetting it ensures the flip animation plays from a stable state
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            }
         });
 
         // Optional: Flip back on mouse leave
